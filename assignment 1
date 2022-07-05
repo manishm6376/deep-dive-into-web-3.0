@@ -1,0 +1,23 @@
+import hashlib
+import timeit
+def valid(string2): 
+     if (string2[0]=='0' and string2[1]=='0' and string2[2]=='0' and string2[3]=='0' and string2[4]=='0'):
+        return 1
+     else:
+        return 0;
+start = timeit.default_timer()
+print("Number : ",end=" ")
+string1=input()
+result = hashlib.sha256(string1.encode())
+string2=result.hexdigest()
+j=0
+while True:
+    if valid(string2)==1:
+        print("Positive number: ",j)
+        print("SHA256 Hash: ",string2)
+        break
+    j=j+1
+    string2=hashlib.sha256((string2+str(j)).encode())
+    string2=string2.hexdigest()
+stop = timeit.default_timer()
+print("Time taken : ",stop-start)
